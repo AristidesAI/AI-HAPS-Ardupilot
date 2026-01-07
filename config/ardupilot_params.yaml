@@ -1,0 +1,145 @@
+# ArduPilot Parameters for HAPS Glider
+# These parameters are optimized for stratospheric solar glider operations
+
+# =============================================================================
+# FLIGHT MODE CONFIGURATION
+# =============================================================================
+flight_modes:
+  FLTMODE1: 10   # AUTO - primary autonomous mode
+  FLTMODE2: 11   # RTL - emergency return
+  FLTMODE3: 5    # FBWB - manual control backup
+  FLTMODE4: 12   # LOITER - station keeping
+  FLTMODE5: 24   # THERMAL - soaring mode
+  FLTMODE6: 15   # GUIDED - AI control mode
+
+# =============================================================================
+# SOARING / GLIDER CONFIGURATION
+# =============================================================================
+soaring:
+  SOARING_ENABLE: 1
+  SOAR_ALT_MAX: 25000       # Maximum soaring altitude (m)
+  SOAR_ALT_MIN: 18000       # Minimum soaring altitude (m)
+  SOAR_ALT_CUTOFF: 15000    # Emergency altitude cutoff (m)
+  SOAR_VSPEED: 0.5          # Minimum climb rate to detect thermal (m/s)
+  SOAR_Q1: 0.001            # Process noise for thermal strength
+  SOAR_Q2: 0.0001           # Process noise for thermal radius
+  SOAR_R: 0.1               # Observation noise for vertical speed
+  SOAR_DIST_AHEAD: 1000     # Distance to look ahead for thermals (m)
+  SOAR_MIN_THML_S: 20       # Minimum time in thermal (s)
+  SOAR_MIN_CRSE_S: 30       # Minimum time in cruise between thermals (s)
+
+# =============================================================================
+# AIRSPEED CONFIGURATION
+# =============================================================================
+airspeed:
+  ARSPD_FBW_MIN: 15         # Minimum airspeed in FBW modes (m/s)
+  ARSPD_FBW_MAX: 30         # Maximum airspeed in FBW modes (m/s)
+  TRIM_ARSPD_CM: 2000       # Cruise airspeed (cm/s = 20 m/s)
+  ARSPD_USE: 1              # Use airspeed sensor
+  ARSPD_AUTOCAL: 1          # Auto-calibrate airspeed
+
+# =============================================================================
+# THROTTLE CONFIGURATION
+# =============================================================================
+throttle:
+  THR_MAX: 80               # Maximum throttle (%)
+  THR_MIN: 0                # Minimum throttle (%)
+  THR_SLEWRATE: 100         # Throttle slew rate (%/s)
+
+# =============================================================================
+# TECS (Total Energy Control System)
+# =============================================================================
+tecs:
+  TECS_SINK_MAX: 0.5        # Maximum sink rate (m/s) - glider optimized
+  TECS_CLMB_MAX: 3.0        # Maximum climb rate (m/s)
+  TECS_TIME_CONST: 8.0      # Time constant for TECS (s)
+  TECS_SPDWEIGHT: 1.0       # Speed/height weight (1.0 = balanced)
+  TECS_PTCH_DAMP: 0.5       # Pitch damping
+  TECS_RLL2THR: 15          # Roll to throttle feed-forward
+  TECS_SYNAIRSPEED: 1       # Use synthetic airspeed
+
+# =============================================================================
+# NAVIGATION
+# =============================================================================
+navigation:
+  NAVL1_PERIOD: 25          # L1 navigation period (s) - large for stratosphere
+  NAVL1_DAMPING: 0.75       # L1 damping
+  WP_RADIUS: 200            # Waypoint radius (m)
+  WP_LOITER_RAD: 1000       # Loiter radius (m)
+  WP_MAX_RADIUS: 3000       # Maximum loiter radius (m)
+
+# =============================================================================
+# PITCH CONFIGURATION
+# =============================================================================
+pitch:
+  PTCH2SRV_TCONST: 0.8      # Pitch time constant
+  PTCH_LIM_MAX_DEG: 20      # Maximum pitch up (deg)
+  PTCH_LIM_MIN_DEG: -15     # Maximum pitch down (deg)
+  PTCH2SRV_RLL: 1.0         # Pitch compensation for roll
+
+# =============================================================================
+# ROLL CONFIGURATION
+# =============================================================================
+roll:
+  LIM_ROLL_CD: 4500         # Maximum roll angle (centidegrees = 45°)
+  RLL2SRV_TCONST: 0.5       # Roll time constant
+  RLL2SRV_RMAX: 60          # Maximum roll rate (deg/s)
+
+# =============================================================================
+# GEOFENCING
+# =============================================================================
+geofence:
+  FENCE_ENABLE: 1           # Enable geofence
+  FENCE_TYPE: 7             # Altitude + circle fence
+  FENCE_ALT_MAX: 26000      # Maximum altitude (m)
+  FENCE_ALT_MIN: 17000      # Minimum altitude (m)
+  FENCE_RADIUS: 50000       # Fence radius (m) = 50km
+  FENCE_ACTION: 1           # Action on breach (1 = RTL)
+  FENCE_MARGIN: 200         # Margin from fence (m)
+  FENCE_RET_RALLY: 0        # Return to home, not rally point
+
+# =============================================================================
+# BATTERY CONFIGURATION
+# =============================================================================
+battery:
+  BATT_MONITOR: 4           # Analog voltage and current
+  BATT_CAPACITY: 50000      # Capacity (mAh) = 50Ah
+  BATT_CRT_VOLT: 42.0       # Critical voltage (V) - 3.5V/cell x 12
+  BATT_LOW_VOLT: 46.8       # Low voltage warning (V) - 3.9V/cell x 12
+  BATT_FS_LOW_ACT: 2        # Low battery action (2 = RTL)
+  BATT_FS_CRT_ACT: 1        # Critical battery action (1 = Land)
+  BATT_ARM_VOLT: 48.0       # Minimum voltage to arm (V)
+  BATT_ARM_MAH: 0           # No mAh check for arming
+
+# =============================================================================
+# FAILSAFE CONFIGURATION
+# =============================================================================
+failsafe:
+  FS_SHORT_ACTN: 0          # Short failsafe action (0 = continue)
+  FS_LONG_ACTN: 1           # Long failsafe action (1 = RTL)
+  FS_SHORT_TIMEOUT: 1.5     # Short failsafe timeout (s)
+  FS_LONG_TIMEOUT: 20       # Long failsafe timeout (s)
+  FS_GCS_ENABL: 2           # GCS failsafe (2 = RTL after timeout)
+  FS_GCS_TIMEOUT: 300       # GCS failsafe timeout (s) = 5 min
+
+# =============================================================================
+# TELEMETRY RATES
+# =============================================================================
+telemetry:
+  SR1_EXT_STAT: 5           # Extended status rate (Hz)
+  SR1_POSITION: 5           # Position rate (Hz)
+  SR1_RAW_SENS: 2           # Raw sensors rate (Hz)
+  SR1_RC_CHAN: 2            # RC channels rate (Hz)
+  SR1_RAW_CTRL: 2           # Raw controller rate (Hz)
+  SR1_EXTRA1: 5             # Extra 1 rate (Hz)
+  SR1_EXTRA2: 5             # Extra 2 rate (Hz)
+  SR1_EXTRA3: 2             # Extra 3 rate (Hz)
+
+# =============================================================================
+# SERIAL PORT CONFIGURATION
+# =============================================================================
+serial:
+  SERIAL1_PROTOCOL: 2       # MAVLink 2
+  SERIAL1_BAUD: 57600       # Baud rate
+  SYSID_THISMAV: 1          # System ID
+  SYSID_MYGCS: 255          # GCS System ID

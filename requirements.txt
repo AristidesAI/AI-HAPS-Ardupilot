@@ -1,0 +1,35 @@
+# HAPS Glider - ArduPilot Integration Dependencies
+
+# Core MAVLink communication
+pymavlink>=2.4.41
+dronekit>=2.9.2
+
+# Data processing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Async operations
+aiohttp>=3.8.0
+asyncio-mqtt>=0.16.0
+
+# Logging and monitoring
+structlog>=23.1.0
+
+# Geospatial calculations
+pyproj>=3.5.0
+
+# Time/date handling
+pytz>=2023.3
+astral>=3.2  # Sun position calculations
+
+# Testing
+pytest>=7.3.0
+pytest-asyncio>=0.21.0
+
+# Optional: ML/AI (for Jetson deployment)
+# torch>=2.0.0
+# torchvision>=0.15.0

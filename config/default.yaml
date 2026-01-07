@@ -1,0 +1,68 @@
+# HAPS Glider - Default Configuration
+# High Altitude Pseudo-Satellite Autonomous Flight System
+
+# MAVLink Connection
+mavlink:
+  connection_string: "udp:127.0.0.1:14550"  # SITL default
+  baud_rate: 57600
+  source_system: 255
+  source_component: 0
+  heartbeat_interval: 1.0
+  timeout: 30.0
+
+# Energy Management
+energy:
+  battery_capacity_wh: 600.0  # 50Ah @ 12V nominal
+  battery_cells: 12
+  cell_voltage_min: 3.0
+  cell_voltage_max: 4.2
+  cell_voltage_nominal: 3.7
+  critical_soc_percent: 20.0
+  low_soc_percent: 40.0
+  solar_panel_area_m2: 4.0
+  solar_efficiency: 0.22
+  power_baseline_w: 10.0
+
+# Flight Parameters
+flight:
+  altitude_min_m: 18000.0  # ~59,000 ft
+  altitude_max_m: 25000.0  # ~82,000 ft
+  altitude_target_m: 20000.0
+  airspeed_min_ms: 15.0
+  airspeed_max_ms: 30.0
+  airspeed_cruise_ms: 20.0
+  loiter_radius_m: 1000.0
+  waypoint_radius_m: 200.0
+  max_bank_angle_deg: 30.0
+  max_climb_rate_ms: 3.0
+  max_sink_rate_ms: 0.5
+
+# Station Keeping
+station_keeping:
+  geofence_radius_m: 50000.0  # 50km operational radius
+  position_tolerance_m: 500.0
+  altitude_tolerance_m: 100.0
+  wind_compensation_enabled: true
+  drift_correction_interval_s: 60.0
+
+# Payload Configuration
+payload:
+  camera_enabled: true
+  comms_relay_enabled: true
+  max_payload_power_w: 100.0
+  camera_power_w: 15.0
+  comms_power_w: 50.0
+
+# Safety Configuration
+safety:
+  geofence_enabled: true
+  link_loss_timeout_s: 300.0  # 5 minutes
+  link_loss_action: "continue"  # continue, rtl, loiter
+  low_battery_action: "rtl"
+  critical_battery_action: "land"
+  emergency_descent_rate_ms: 5.0
+
+# Home Location (Sydney, Australia - default)
+home_lat: -33.8688
+home_lon: 151.2093
+home_alt_m: 0.0
